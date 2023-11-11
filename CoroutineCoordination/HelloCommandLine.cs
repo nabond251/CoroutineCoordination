@@ -1,19 +1,14 @@
 ﻿namespace CoroutineCoordination;
 
-using System.Collections;
+using CoroutineCommandLine;
 
-public class HelloCommandLine : IEnumerable<string?>
+public class HelloCommandLine : CommandLineCoroutine
 {
-    public string? NextValue { private get; set; }
-
-    public IEnumerator<string?> GetEnumerator()
+    public override IEnumerator<string?> GetEnumerator()
     {
         yield return "Please enter your name.";
         yield return null;
         var name = this.NextValue;
         yield return $"Hello, {name}!";
     }
-
-    IEnumerator IEnumerable.GetEnumerator() =>
-        this.GetEnumerator();
 }

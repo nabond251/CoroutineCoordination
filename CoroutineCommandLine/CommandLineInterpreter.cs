@@ -2,13 +2,13 @@
 
 public static class CommandLineInterpreter
 {
-    public static void Interpret(IEnumerable<string?> program)
+    public static void Interpret(CommandLineCoroutine program)
     {
         foreach (var i in program)
         {
             if (i is null)
             {
-                Console.ReadLine();
+                program.NextValue = Console.ReadLine();
             }
             else
             {
