@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoroutineCoordination", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoroutineCommandLine", "CoroutineCommandLine\CoroutineCommandLine.csproj", "{76FE529C-194A-4B01-9462-01C74ABF8F9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoroutineCoordinationTests", "CoroutineCoordinationTests\CoroutineCoordinationTests.csproj", "{C864BE01-617C-4723-9A4E-83B1C80BD629}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{76FE529C-194A-4B01-9462-01C74ABF8F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76FE529C-194A-4B01-9462-01C74ABF8F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76FE529C-194A-4B01-9462-01C74ABF8F9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C864BE01-617C-4723-9A4E-83B1C80BD629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C864BE01-617C-4723-9A4E-83B1C80BD629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C864BE01-617C-4723-9A4E-83B1C80BD629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C864BE01-617C-4723-9A4E-83B1C80BD629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
