@@ -6,15 +6,24 @@ public static class CommandLineInterpreter
     {
         foreach (var i in program)
         {
-            if (i is CommandLineSink.ReadLine)
+            program.NextValue = i switch
             {
-                program.NextValue = new CommandLineSource.ReadLine(
-                    Console.ReadLine());
-            }
-            else if (i is CommandLineSink.WriteLine w)
-            {
-                Console.WriteLine(w.Text);
-            }
+                CommandLineSink.ReadLine => InterpretReadLine(),
+                CommandLineSink.WriteLine w => InterpretWriteLine(w),
+                _ => null,
+            };
         }
+    }
+
+    private static CommandLineSource InterpretReadLine()
+    {
+        return new CommandLineSource.ReadLine(Console.ReadLine());
+    }
+
+    private static CommandLineSource InterpretWriteLine(
+        CommandLineSink.WriteLine w)
+    {
+        Console.WriteLine(w.Text);
+        return new CommandLineSource.WriteLine();
     }
 }
