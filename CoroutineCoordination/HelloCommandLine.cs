@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿namespace CoroutineCoordination;
 
-namespace CoroutineCoordination;
+using System.Collections;
 
 public class HelloCommandLine : IEnumerable<string?>
 {
@@ -8,7 +8,10 @@ public class HelloCommandLine : IEnumerable<string?>
 
     public IEnumerator<string?> GetEnumerator()
     {
-        yield break;
+        yield return "Please enter your name.";
+        yield return null;
+        var name = this.NextValue;
+        yield return $"Hello, {name}!";
     }
 
     IEnumerator IEnumerable.GetEnumerator() =>
