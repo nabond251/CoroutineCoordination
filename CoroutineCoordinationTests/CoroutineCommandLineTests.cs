@@ -1,5 +1,6 @@
 namespace CoroutineCoordinationTests;
 
+using CoroutineCommandLine;
 using CoroutineCoordination;
 
 public class CoroutineCommandLineTests
@@ -11,14 +12,14 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
-        Assert.Equal("Please enter your name.", enumerator.Current);
+        Assert.Equal(new CommandLineSink.WriteLine("Please enter your name."), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        Assert.Null(enumerator.Current);
-        program.NextValue = "Nathan";
+        Assert.Equal(new CommandLineSink.ReadLine(), enumerator.Current);
+        program.NextValue = new CommandLineSource.ReadLine("Nathan");
 
         Assert.True(enumerator.MoveNext(), "Did not greet");
-        Assert.Equal("Hello, Nathan!", enumerator.Current);
+        Assert.Equal(new CommandLineSink.WriteLine("Hello, Nathan!"), enumerator.Current);
 
         Assert.False(enumerator.MoveNext());
     }

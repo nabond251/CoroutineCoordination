@@ -2,11 +2,11 @@
 
 using System.Collections;
 
-public abstract class CommandLineCoroutine : IEnumerable<string?>
+public abstract class CommandLineCoroutine : IEnumerable<CommandLineSink>
 {
-    public string? NextValue { protected get; set; }
+    public CommandLineSource? NextValue { protected get; set; }
 
-    public abstract IEnumerator<string?> GetEnumerator();
+    public abstract IEnumerator<CommandLineSink> GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() =>
         this.GetEnumerator();

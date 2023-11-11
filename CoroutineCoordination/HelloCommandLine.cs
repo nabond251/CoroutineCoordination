@@ -4,11 +4,12 @@ using CoroutineCommandLine;
 
 public class HelloCommandLine : CommandLineCoroutine
 {
-    public override IEnumerator<string?> GetEnumerator()
+    public override IEnumerator<CommandLineSink> GetEnumerator()
     {
-        yield return "Please enter your name.";
-        yield return null;
-        var name = this.NextValue;
-        yield return $"Hello, {name}!";
+        yield return new CommandLineSink.WriteLine("Please enter your name.");
+        yield return new CommandLineSink.ReadLine();
+        var name = this.NextValue as CommandLineSource.ReadLine ??
+            throw new InvalidProgramException();
+        yield return new CommandLineSink.WriteLine($"Hello, {name.Text}!");
     }
 }
