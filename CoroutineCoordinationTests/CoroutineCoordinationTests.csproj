@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CoroutineCoordination\CoroutineCoordination.csproj" />
+  </ItemGroup>
+
 </Project>
