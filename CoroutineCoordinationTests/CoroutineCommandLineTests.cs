@@ -15,7 +15,7 @@ public class CoroutineCommandLineTests
         Assert.Equal(new CommandLineSink.WriteLine("Please enter your name."), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var expectedSubProgram = new ReadLineCoroutine();
+        var expectedSubProgram = new FuncCoroutine<string?>(Console.ReadLine);
         var expectedSubEnumerator = expectedSubProgram.GetEnumerator();
         Assert.True(expectedSubEnumerator.MoveNext());
         var actualReadLine = enumerator.Current as CommandLineSink.ReadLine;

@@ -2,9 +2,16 @@
 
 using System.Collections;
 
-public class ReadLineCoroutine : IEnumerable<Unit>
+public class FuncCoroutine<T> : IEnumerable<Unit>
 {
-    public string? NextValue { get; set; }
+    public FuncCoroutine(Func<T> func)
+    {
+        this.Func = func;
+    }
+
+    public Func<T> Func { get; }
+
+    public T? NextValue { get; set; }
 
     public IEnumerator<Unit> GetEnumerator()
     {

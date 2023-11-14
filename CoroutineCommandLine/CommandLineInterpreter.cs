@@ -18,7 +18,7 @@ public static class CommandLineInterpreter
     private static CommandLineSource InterpretReadLine(
         CommandLineSink.ReadLine r)
     {
-        ReadLineInterpreter.Interpret(r.Program);
+        FuncInterpreter<string?>.Interpret(r.Program);
         return new CommandLineSource.ReadLine(r.Program.NextValue);
     }
 
