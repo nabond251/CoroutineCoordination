@@ -7,8 +7,9 @@ public class HelloCommandLine : CommandLineCoroutine
     public override IEnumerator<CommandLineSink> GetEnumerator()
     {
         yield return new CommandLineSink.WriteLine("Please enter your name.");
-        yield return new CommandLineSink.ReadLine();
-        var name = this.NextValue as CommandLineSource.ReadLine ??
+        var readLine = new ReadLineCoroutine();
+        yield return new CommandLineSink.ReadLine(readLine);
+        var name = readLine.NextValue as ReadLineSource.ReadLine ??
             throw new InvalidProgramException();
         yield return new CommandLineSink.WriteLine($"Hello, {name.Text}!");
     }

@@ -15,8 +15,16 @@ public class CoroutineCommandLineTests
         Assert.Equal(new CommandLineSink.WriteLine("Please enter your name."), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        Assert.Equal(new CommandLineSink.ReadLine(), enumerator.Current);
-        program.NextValue = new CommandLineSource.ReadLine("Nathan");
+        var expectedSubProgram = new ReadLineCoroutine();
+        var expectedSubEnumerator = expectedSubProgram.GetEnumerator();
+        Assert.True(expectedSubEnumerator.MoveNext());
+        var actualReadLine = enumerator.Current as CommandLineSink.ReadLine;
+        Assert.NotNull(actualReadLine);
+        var actualSubProgram = actualReadLine.Program;
+        var actualSubEnumerator = actualSubProgram.GetEnumerator();
+        Assert.True(actualSubEnumerator.MoveNext(), "Did not call ReadLine");
+        Assert.Equal(expectedSubEnumerator.Current, actualSubEnumerator.Current);
+        actualSubProgram.NextValue = new ReadLineSource.ReadLine("Nathan");
 
         Assert.True(enumerator.MoveNext(), "Did not greet");
         Assert.Equal(new CommandLineSink.WriteLine("Hello, Nathan!"), enumerator.Current);

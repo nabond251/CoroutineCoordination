@@ -2,7 +2,7 @@
 
 public record CommandLineSink
 {
-    public record ReadLine() : CommandLineSink();
+    public record ReadLine(ReadLineCoroutine Program) : CommandLineSink();
 
     public record WriteLine(string Text) : CommandLineSink();
 

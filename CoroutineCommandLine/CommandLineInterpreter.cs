@@ -8,16 +8,20 @@ public static class CommandLineInterpreter
         {
             program.NextValue = i switch
             {
-                CommandLineSink.ReadLine => InterpretReadLine(),
+                CommandLineSink.ReadLine r => InterpretReadLine(r),
                 CommandLineSink.WriteLine w => InterpretWriteLine(w),
                 _ => null,
             };
         }
     }
 
-    private static CommandLineSource InterpretReadLine()
+    private static CommandLineSource InterpretReadLine(
+        CommandLineSink.ReadLine r)
     {
-        return new CommandLineSource.ReadLine(Console.ReadLine());
+        ReadLineInterpreter.Interpret(r.Program);
+        var nextValue = r.Program.NextValue as ReadLineSource.ReadLine ??
+            throw new InvalidProgramException();
+        return new CommandLineSource.ReadLine(nextValue.Text);
     }
 
     private static CommandLineSource InterpretWriteLine(
