@@ -8,7 +8,7 @@ public class ReadLineCoroutine : IEnumerable<ReadLineSink>
 
     public IEnumerator<ReadLineSink> GetEnumerator()
     {
-        yield return new ReadLineSink.ReadLine();
+        yield return new ReadLineSink();
     }
 
     IEnumerator IEnumerable.GetEnumerator() =>

@@ -24,7 +24,7 @@ public class CoroutineCommandLineTests
         var actualSubEnumerator = actualSubProgram.GetEnumerator();
         Assert.True(actualSubEnumerator.MoveNext(), "Did not call ReadLine");
         Assert.Equal(expectedSubEnumerator.Current, actualSubEnumerator.Current);
-        actualSubProgram.NextValue = new ReadLineSource.ReadLine("Nathan");
+        actualSubProgram.NextValue = new ReadLineSource("Nathan");
 
         Assert.True(enumerator.MoveNext(), "Did not greet");
         Assert.Equal(new CommandLineSink.WriteLine("Hello, Nathan!"), enumerator.Current);

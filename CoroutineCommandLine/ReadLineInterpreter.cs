@@ -8,7 +8,7 @@ public static class ReadLineInterpreter
         {
             program.NextValue = i switch
             {
-                ReadLineSink.ReadLine => InterpretReadLine(),
+                ReadLineSink => InterpretReadLine(),
                 _ => null,
             };
         }
@@ -16,6 +16,6 @@ public static class ReadLineInterpreter
 
     private static ReadLineSource InterpretReadLine()
     {
-        return new ReadLineSource.ReadLine(Console.ReadLine());
+        return new ReadLineSource(Console.ReadLine());
     }
 }
