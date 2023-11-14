@@ -19,9 +19,7 @@ public static class CommandLineInterpreter
         CommandLineSink.ReadLine r)
     {
         ReadLineInterpreter.Interpret(r.Program);
-        var nextValue = r.Program.NextValue ??
-            throw new InvalidProgramException();
-        return new CommandLineSource.ReadLine(nextValue.Text);
+        return new CommandLineSource.ReadLine(r.Program.NextValue);
     }
 
     private static CommandLineSource InterpretWriteLine(

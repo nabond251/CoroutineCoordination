@@ -8,14 +8,14 @@ public static class ReadLineInterpreter
         {
             program.NextValue = i switch
             {
-                ReadLineSink => InterpretReadLine(),
+                Unit => InterpretReadLine(),
                 _ => null,
             };
         }
     }
 
-    private static ReadLineSource InterpretReadLine()
+    private static string? InterpretReadLine()
     {
-        return new ReadLineSource(Console.ReadLine());
+        return Console.ReadLine();
     }
 }

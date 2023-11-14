@@ -2,13 +2,13 @@
 
 using System.Collections;
 
-public class ReadLineCoroutine : IEnumerable<ReadLineSink>
+public class ReadLineCoroutine : IEnumerable<Unit>
 {
-    public ReadLineSource? NextValue { get; set; }
+    public string? NextValue { get; set; }
 
-    public IEnumerator<ReadLineSink> GetEnumerator()
+    public IEnumerator<Unit> GetEnumerator()
     {
-        yield return new ReadLineSink();
+        yield return new Unit();
     }
 
     IEnumerator IEnumerable.GetEnumerator() =>

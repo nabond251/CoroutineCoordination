@@ -1,3 +1,3 @@
 ﻿namespace CoroutineCommandLine;
 
-public record ReadLineSink();
+public record Unit();
