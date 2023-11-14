@@ -10,7 +10,7 @@ public static class CommandLineInterpreter
             {
                 CommandLineSink.ReadLine r => InterpretReadLine(r),
                 CommandLineSink.WriteLine w => InterpretWriteLine(w),
-                _ => null,
+                _ => throw new InvalidOperationException(),
             };
         }
     }

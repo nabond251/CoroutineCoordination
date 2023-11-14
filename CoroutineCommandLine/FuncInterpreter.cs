@@ -9,7 +9,7 @@ public static class FuncInterpreter<T>
             program.NextValue = i switch
             {
                 Unit => InterpretFunc(program.Func),
-                _ => default,
+                _ => throw new InvalidOperationException(),
             };
         }
     }
