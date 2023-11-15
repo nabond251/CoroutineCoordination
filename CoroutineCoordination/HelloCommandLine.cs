@@ -4,9 +4,9 @@ using CoroutineCommandLine;
 
 public class HelloCommandLine : CommandLineCoroutine
 {
-    private readonly FuncCoroutine<string?> name;
+    private readonly IFuncCoroutine<string?> name;
 
-    public HelloCommandLine(FuncCoroutine<string?> name)
+    public HelloCommandLine(IFuncCoroutine<string?> name)
     {
         this.name = name;
     }

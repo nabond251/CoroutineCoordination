@@ -8,7 +8,7 @@ public class CoroutineCommandLineTests
     [Fact]
     public void CommandLineShouldGreetUser()
     {
-        var name = new FuncCoroutine<string?>(Console.ReadLine);
+        var name = new MockReadLineCoroutine();
         var program = new HelloCommandLine(name);
         var enumerator = program.GetEnumerator();
 

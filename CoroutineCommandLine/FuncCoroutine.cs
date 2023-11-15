@@ -2,7 +2,7 @@
 
 using System.Collections;
 
-public class FuncCoroutine<T> : IEnumerable<Unit>
+public class FuncCoroutine<T> : IFuncCoroutine<T>
 {
     public FuncCoroutine(Func<T> func)
     {

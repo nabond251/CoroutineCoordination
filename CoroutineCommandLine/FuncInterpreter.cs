@@ -2,7 +2,7 @@
 
 public static class FuncInterpreter<T>
 {
-    public static void Interpret(FuncCoroutine<T> program)
+    public static void Interpret(IFuncCoroutine<T> program)
     {
         foreach (var i in program)
         {
