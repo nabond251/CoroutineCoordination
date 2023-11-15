@@ -8,16 +8,16 @@ public class CoroutineCommandLineTests
     [Fact]
     public void CommandLineShouldGreetUser()
     {
-        var program = new HelloCommandLine(Console.ReadLine);
+        var name = new FuncCoroutine<string?>(Console.ReadLine);
+        var program = new HelloCommandLine(name);
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
         Assert.Equal(new CommandLineSink.WriteLine("Please enter your name."), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var readLine = enumerator.Current as CommandLineSink.ReadLine;
-        Assert.NotNull(readLine);
-        readLine.Program.NextValue = "Nathan";
+        Assert.Equal(new CommandLineSink.ReadLine(name), enumerator.Current);
+        name.NextValue = "Nathan";
 
         Assert.True(enumerator.MoveNext(), "Did not greet");
         Assert.Equal(new CommandLineSink.WriteLine("Hello, Nathan!"), enumerator.Current);
