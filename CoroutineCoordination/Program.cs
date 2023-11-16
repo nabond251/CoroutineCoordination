@@ -1,2 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using CoroutineCommandLine;
+using CoroutineCoordination;
+using CoroutineUtilities;
+
+CommandLineInterpreter.Interpret(
+    new HelloCommandLine(
+        new FuncCoroutine<string?>(
+            Console.ReadLine)));
