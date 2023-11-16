@@ -1,3 +1,3 @@
-﻿namespace CoroutineCommandLine;
+﻿namespace CoroutineUtilities;
 
 public record Unit();

@@ -1,8 +1,9 @@
-﻿using CoroutineCommandLine;
-using System.Collections;
-
-namespace CoroutineCoordinationTests
+﻿namespace CoroutineCoordinationTests
 {
+    using System.Collections;
+    using CoroutineCommandLine;
+    using CoroutineUtilities;
+
     internal class MockReadLineCoroutine : IFuncCoroutine<string?>
     {
         public Func<string?> Func { get; } = () => null;

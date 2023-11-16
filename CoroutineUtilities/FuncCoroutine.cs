@@ -1,4 +1,4 @@
-﻿namespace CoroutineCommandLine;
+﻿namespace CoroutineUtilities;
 
 using System.Collections;
 

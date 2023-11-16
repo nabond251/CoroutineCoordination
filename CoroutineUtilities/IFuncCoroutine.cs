@@ -1,9 +1,8 @@
-﻿namespace CoroutineCommandLine
-{
-    public interface IFuncCoroutine<T> : IEnumerable<Unit>
-    {
-        Func<T> Func { get; }
+﻿namespace CoroutineUtilities;
 
-        T? NextValue { get; set; }
-    }
+public interface IFuncCoroutine<T> : IEnumerable<Unit>
+{
+    Func<T> Func { get; }
+
+    T? NextValue { get; set; }
 }

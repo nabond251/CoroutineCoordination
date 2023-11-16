@@ -1,5 +1,7 @@
 ﻿namespace CoroutineCommandLine;
 
+using CoroutineUtilities;
+
 public static class CommandLineInterpreter
 {
     public static void Interpret(CommandLineCoroutine program)

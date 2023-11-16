@@ -1,4 +1,4 @@
-﻿namespace CoroutineCommandLine;
+﻿namespace CoroutineUtilities;
 
 public static class FuncInterpreter<T>
 {
