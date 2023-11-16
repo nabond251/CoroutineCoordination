@@ -1,6 +1,6 @@
 ﻿namespace CoroutineUtilities;
 
-public interface IFuncCoroutine<T> : IEnumerable<Unit>
+public interface IFuncCoroutine<T>
 {
     T? NextValue { get; set; }
 }
