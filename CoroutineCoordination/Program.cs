@@ -4,5 +4,4 @@ using CoroutineUtilities;
 
 CommandLineInterpreter.Interpret(
     new HelloCommandLine(
-        new FuncCoroutine<string?>(
-            Console.ReadLine)));
+        new FuncCoroutine<string?>()));
