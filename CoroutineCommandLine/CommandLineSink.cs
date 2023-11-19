@@ -1,10 +1,8 @@
 ﻿namespace CoroutineCommandLine;
 
-using CoroutineUtilities;
-
 public record CommandLineSink
 {
-    public record ReadLine(IFuncCoroutine<string?> Program) : CommandLineSink();
+    public record ReadLine() : CommandLineSink();
 
     public record WriteLine(string Text) : CommandLineSink();
 

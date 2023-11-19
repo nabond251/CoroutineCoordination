@@ -1,7 +1,5 @@
 ﻿namespace CoroutineCommandLine;
 
-using CoroutineUtilities;
-
 public static class CommandLineInterpreter
 {
     public static void Interpret(CommandLineCoroutine program)
@@ -10,18 +8,17 @@ public static class CommandLineInterpreter
         {
             program.NextValue = i switch
             {
-                CommandLineSink.ReadLine r => InterpretReadLine(r),
+                CommandLineSink.ReadLine => InterpretReadLine(),
                 CommandLineSink.WriteLine w => InterpretWriteLine(w),
                 _ => throw new InvalidOperationException(),
             };
         }
     }
 
-    private static CommandLineSource InterpretReadLine(
-        CommandLineSink.ReadLine r)
+    private static CommandLineSource InterpretReadLine()
     {
-        r.Program.NextValue = Console.ReadLine();
-        return new CommandLineSource.ReadLine(r.Program.NextValue);
+        var text = Console.ReadLine();
+        return new CommandLineSource.ReadLine(text);
     }
 
     private static CommandLineSource InterpretWriteLine(
