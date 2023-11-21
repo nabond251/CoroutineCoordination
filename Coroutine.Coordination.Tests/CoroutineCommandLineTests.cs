@@ -1,7 +1,4 @@
-namespace CoroutineCoordinationTests;
-
-using CoroutineCommandLine;
-using CoroutineCoordination;
+namespace Coroutine.Coordination.Tests;
 
 public class CoroutineCommandLineTests
 {

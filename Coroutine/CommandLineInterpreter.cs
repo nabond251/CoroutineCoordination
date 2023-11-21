@@ -1,4 +1,4 @@
-﻿namespace CoroutineCommandLine;
+﻿namespace Coroutine;
 
 public static class CommandLineInterpreter
 {

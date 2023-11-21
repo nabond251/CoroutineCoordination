@@ -1,6 +1,4 @@
-﻿namespace CoroutineCoordination;
-
-using CoroutineCommandLine;
+﻿namespace Coroutine.Coordination;
 
 public class HelloCommandLine : CommandLineCoroutine
 {
