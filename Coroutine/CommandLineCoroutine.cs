@@ -1,13 +1,12 @@
 ﻿namespace Coroutine;
 
-using System.Collections;
+using System.Threading.Channels;
 
-public abstract class CommandLineCoroutine : IEnumerable<CommandLineSink>
+public abstract class CommandLineCoroutine :
+    BaseCoroutine<CommandLineSink, Unit, CommandLineSource>
 {
-    public CommandLineSource? NextValue { protected get; set; }
-
-    public abstract IEnumerator<CommandLineSink> GetEnumerator();
-
-    IEnumerator IEnumerable.GetEnumerator() =>
-        this.GetEnumerator();
+    protected CommandLineCoroutine(ChannelReader<CommandLineSource> nextReader) :
+        base(nextReader)
+    {
+    }
 }

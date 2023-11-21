@@ -5,12 +5,12 @@ using System.Threading.Channels;
 
 public abstract class BaseCoroutine<T, TReturn, TNext> : IEnumerable<T>
 {
-    protected BaseCoroutine(ChannelReader<TNext> next)
+    protected BaseCoroutine(ChannelReader<TNext> nextReader)
     {
-        this.Next = next;
+        this.NextReader = nextReader;
     }
 
-    public ChannelReader<TNext> Next { get; }
+    public ChannelReader<TNext> NextReader { get; }
 
     public TReturn? Return { get; protected set; }
 
