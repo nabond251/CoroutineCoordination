@@ -1,5 +1,3 @@
-using System.Threading.Channels;
-
 namespace Coroutine.Coordination.Tests;
 
 public class CoroutineCommandLineTests

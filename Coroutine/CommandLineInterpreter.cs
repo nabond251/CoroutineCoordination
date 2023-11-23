@@ -8,28 +8,9 @@ public static class CommandLineInterpreter
     {
         foreach (var i in program)
         {
-            _ = i switch
-            {
-                CommandLineSink.ReadLine r => InterpretReadLine(r),
-                CommandLineSink.WriteLine w => InterpretWriteLine(w),
-                _ => throw new InvalidOperationException(),
-            };
+            i.Execute();
         }
 
         return program.Result;
-    }
-
-    private static Unit InterpretReadLine(
-        CommandLineSink.ReadLine r)
-    {
-        r.Result = Console.ReadLine();
-        return new Unit();
-    }
-
-    private static Unit InterpretWriteLine(
-        CommandLineSink.WriteLine w)
-    {
-        Console.WriteLine(w.Text);
-        return new Unit();
     }
 }
