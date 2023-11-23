@@ -4,13 +4,13 @@ namespace Coroutine.Coordination;
 
 public class HelloCommandLine : CommandLineCoroutine<Unit>
 {
-    public override IEnumerator<CommandLineSink> GetEnumerator()
+    public override IEnumerator<CommandLineEffect> GetEnumerator()
     {
-        yield return new CommandLineSink.WriteLine("Please enter your name.");
+        yield return new CommandLineEffect.WriteLine("Please enter your name.");
 
-        var nameEffect = new CommandLineSink.ReadLine();
+        var nameEffect = new CommandLineEffect.ReadLine();
         yield return nameEffect;
 
-        yield return new CommandLineSink.WriteLine($"Hello, {nameEffect.Result}!");
+        yield return new CommandLineEffect.WriteLine($"Hello, {nameEffect.Result}!");
     }
 }

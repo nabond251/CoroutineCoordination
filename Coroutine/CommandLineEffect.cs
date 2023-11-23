@@ -1,8 +1,8 @@
 ﻿namespace Coroutine;
 
-public abstract record CommandLineSink : IEffect
+public abstract record CommandLineEffect : IEffect
 {
-    public record ReadLine() : CommandLineSink(), IEffect<string>
+    public record ReadLine() : CommandLineEffect(), IEffect<string>
     {
         public string? Result { get; set; }
 
@@ -12,7 +12,7 @@ public abstract record CommandLineSink : IEffect
         }
     }
 
-    public record WriteLine(string Text) : CommandLineSink()
+    public record WriteLine(string Text) : CommandLineEffect()
     {
         public override void Execute()
         {
@@ -20,7 +20,7 @@ public abstract record CommandLineSink : IEffect
         }
     }
 
-    private CommandLineSink() { }
+    private CommandLineEffect() { }
 
     public abstract void Execute();
 }
