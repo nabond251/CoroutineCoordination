@@ -25,7 +25,7 @@ public class CoroutineCommandLineTests
     [Fact]
     public void CommandLineShouldReserveSeats()
     {
-        var program = new CommandLineWizard();
+        var program = new ReadReservationRequestCoroutine();
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display first diners prompt");
