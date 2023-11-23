@@ -1,10 +1,8 @@
-﻿using CoroutineCommandLine;
-
-namespace CoroutineCoordination;
+﻿namespace Coroutine.Coordination;
 
 public record ReadQuantitySink
 {
-    public record CommandLine(CommandLineSink Sink) : ReadQuantitySink();
+    public record CommandLine(CommandLineEffect Effect) : ReadQuantitySink();
 
     public record Call(ReadQuantityCoroutine ReadQuantity) : ReadQuantitySink();
 

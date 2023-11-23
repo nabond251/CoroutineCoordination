@@ -1,10 +1,8 @@
-﻿namespace CoroutineCoordination;
+﻿namespace Coroutine.Coordination;
 
-using CoroutineCommandLine;
-
-public class CommandLineWizard : CommandLineCoroutine
+public class CommandLineWizard : CommandLineCoroutine<Unit>
 {
-    public override IEnumerator<CommandLineSink> GetEnumerator()
+    public override IEnumerator<CommandLineEffect> GetEnumerator()
     {
         yield break;
     }
