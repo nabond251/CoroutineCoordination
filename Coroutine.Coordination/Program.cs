@@ -1,4 +1,6 @@
 ﻿using Coroutine;
 using Coroutine.Coordination;
 
-CommandLineInterpreter.Interpret(new HelloCommandLine());
+Console.WriteLine(
+    CommandLineInterpreter.Interpret(
+        new ReadReservationRequestCoroutine()));
