@@ -4,36 +4,32 @@ namespace Coroutine;
 
 public static class CommandLineInterpreter
 {
-    public static void Interpret(
-        CommandLineCoroutine program,
-        ChannelWriter<CommandLineSource> nextWriter)
+    public static T? Interpret<T>(CommandLineCoroutine<T> program)
     {
         foreach (var i in program)
         {
-            var next = i switch
+            _ = i switch
             {
-                CommandLineSink.ReadLine => InterpretReadLine(),
+                CommandLineSink.ReadLine r => InterpretReadLine(r),
                 CommandLineSink.WriteLine w => InterpretWriteLine(w),
                 _ => throw new InvalidOperationException(),
             };
-
-            if (next is not null)
-            {
-                nextWriter.TryWrite(next);
-            }
         }
+
+        return program.Result;
     }
 
-    private static CommandLineSource? InterpretReadLine()
+    private static Unit InterpretReadLine(
+        CommandLineSink.ReadLine r)
     {
-        var text = Console.ReadLine();
-        return new CommandLineSource.ReadLine(text);
+        r.Result = Console.ReadLine();
+        return new Unit();
     }
 
-    private static CommandLineSource? InterpretWriteLine(
+    private static Unit InterpretWriteLine(
         CommandLineSink.WriteLine w)
     {
         Console.WriteLine(w.Text);
-        return null;
+        return new Unit();
     }
 }

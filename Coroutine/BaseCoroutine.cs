@@ -3,16 +3,9 @@
 using System.Collections;
 using System.Threading.Channels;
 
-public abstract class BaseCoroutine<T, TReturn, TNext> : IEnumerable<T>
+public abstract class BaseCoroutine<T, TReturn> : IEnumerable<T>
 {
-    protected BaseCoroutine(ChannelReader<TNext> nextReader)
-    {
-        this.NextReader = nextReader;
-    }
-
-    public ChannelReader<TNext> NextReader { get; }
-
-    public TReturn? Return { get; protected set; }
+    public TReturn? Result { get; protected set; }
 
     public abstract IEnumerator<T> GetEnumerator();
 

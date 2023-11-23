@@ -1,12 +1,6 @@
 ﻿namespace Coroutine;
 
-using System.Threading.Channels;
-
-public abstract class CommandLineCoroutine :
-    BaseCoroutine<CommandLineSink, Unit, CommandLineSource>
+public abstract class CommandLineCoroutine<T> :
+    BaseCoroutine<CommandLineSink, T>
 {
-    protected CommandLineCoroutine(ChannelReader<CommandLineSource> nextReader) :
-        base(nextReader)
-    {
-    }
 }
