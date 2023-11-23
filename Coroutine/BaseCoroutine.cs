@@ -1,7 +1,6 @@
 ﻿namespace Coroutine;
 
 using System.Collections;
-using System.Threading.Channels;
 
 public abstract class BaseCoroutine<T, TReturn> : IEnumerable<T>
 {

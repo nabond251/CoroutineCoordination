@@ -1,6 +1,4 @@
-﻿using System.Threading.Channels;
-
-namespace Coroutine.Coordination;
+﻿namespace Coroutine.Coordination;
 
 public class HelloCommandLine : CommandLineCoroutine<Unit>
 {

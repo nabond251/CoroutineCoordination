@@ -1,6 +1,4 @@
-﻿using System.Threading.Channels;
-
-namespace Coroutine;
+﻿namespace Coroutine;
 
 public static class CommandLineInterpreter
 {
