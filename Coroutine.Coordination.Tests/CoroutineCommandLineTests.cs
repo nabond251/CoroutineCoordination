@@ -1,5 +1,3 @@
-using System.Xml;
-
 namespace Coroutine.Coordination.Tests;
 
 public class CoroutineCommandLineTests
