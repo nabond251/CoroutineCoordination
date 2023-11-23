@@ -1,32 +1,29 @@
 ﻿namespace Coroutine.Coordination;
 
-using System.Collections;
-
-public class ReadQuantityCoroutine : IEnumerable<ReadQuantitySink>
+public class ReadQuantityCoroutine : CommandLineCoroutine<int>
 {
-    public IEnumerator<ReadQuantitySink> GetEnumerator()
+    public override IEnumerator<CommandLineEffect> GetEnumerator()
     {
-        yield return new ReadQuantitySink.CommandLine(
-            new CommandLineEffect.WriteLine("Please enter number of diners:"));
+        yield return new CommandLineEffect.WriteLine(
+            "Please enter number of diners:");
 
         var quantity = new CommandLineEffect.ReadLine();
-        yield return new ReadQuantitySink.CommandLine(quantity);
+        yield return quantity;
         var l = quantity.Result;
 
         if (int.TryParse(l, out var dinerCount))
         {
-            yield return new ReadQuantitySink.Response(dinerCount);
+            Result = dinerCount;
         }
         else
         {
-            yield return new ReadQuantitySink.CommandLine(
-                new CommandLineEffect.WriteLine("Not an integer."));
+            yield return new CommandLineEffect.WriteLine(
+                "Not an integer.");
 
-            yield return new ReadQuantitySink.Call(
+            var readQuantity = new CommandLineEffect.Call<int>(
                 new ReadQuantityCoroutine());
+            yield return readQuantity;
+            Result = readQuantity.Result;
         }
     }
-
-    IEnumerator IEnumerable.GetEnumerator() =>
-        this.GetEnumerator();
 }

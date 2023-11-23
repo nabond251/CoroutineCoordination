@@ -20,6 +20,21 @@ public abstract record CommandLineEffect : IEffect
         }
     }
 
+    public record Call<T>(CommandLineCoroutine<T> Program) : CommandLineEffect(), IEffect<T>
+    {
+        public T? Result { get; set; }
+
+        public override void Execute()
+        {
+            foreach (var i in Program)
+            {
+                i.Execute();
+            }
+
+            Result = Program.Result;
+        }
+    }
+
     private CommandLineEffect() { }
 
     public abstract void Execute();
