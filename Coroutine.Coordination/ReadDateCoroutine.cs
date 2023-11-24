@@ -1,5 +1,7 @@
 ﻿namespace Coroutine.Coordination;
 
+using System.Globalization;
+
 public class ReadDateCoroutine : Coroutine<DateTime>
 {
     public override IEnumerator<IEffect> GetEnumerator()
@@ -11,7 +13,7 @@ public class ReadDateCoroutine : Coroutine<DateTime>
         yield return date;
         var l = date.Result;
 
-        if (DateTime.TryParse(l, out var dt))
+        if (DateTime.TryParse(l, CultureInfo.CurrentCulture, out var dt))
         {
             Result = dt;
         }

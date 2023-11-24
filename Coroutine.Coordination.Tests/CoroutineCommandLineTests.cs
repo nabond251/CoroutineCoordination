@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Coroutine.Coordination.Tests;
 
 public class CoroutineCommandLineTests
@@ -86,7 +88,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not recurse");
         var readDate = enumerator.Current as Call<DateTime>;
         Assert.NotNull(readDate);
-        var date = DateTime.Parse("11-28-2023");
+        var date = DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture);
         readDate.Result = date;
 
         Assert.False(enumerator.MoveNext());
@@ -108,7 +110,9 @@ public class CoroutineCommandLineTests
         date2.Result = "11-28-2023";
 
         Assert.False(enumerator.MoveNext());
-        Assert.Equal(DateTime.Parse("11-28-2023"), program.Result);
+        Assert.Equal(
+            DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture),
+            program.Result);
     }
 
     [Fact]
@@ -161,7 +165,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not read date");
         var readDate = enumerator.Current as Call<DateTime>;
         Assert.NotNull(readDate);
-        readDate.Result = DateTime.Parse("11-28-2023");
+        readDate.Result = DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture);
 
         Assert.True(enumerator.MoveNext(), "Did not read name");
         var readName = enumerator.Current as Call<string>;
@@ -176,7 +180,7 @@ public class CoroutineCommandLineTests
         Assert.False(enumerator.MoveNext());
         Assert.Equal(
             new Reservation(
-                DateTime.Parse("11-28-2023"),
+                DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture),
                 "Nathan Bond",
                 "nathan@example.com",
                 2),
