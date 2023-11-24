@@ -1,22 +1,22 @@
 ﻿namespace Coroutine.Coordination;
 
-public class ReadReservationRequestCoroutine : CommandLineCoroutine<Reservation>
+public class ReadReservationRequestCoroutine : Coroutine<Reservation>
 {
-    public override IEnumerator<CommandLineEffect> GetEnumerator()
+    public override IEnumerator<IEffect> GetEnumerator()
     {
-        var readQuantity = new CommandLineEffect.Call<int>(new ReadQuantityCoroutine());
+        var readQuantity = new Call<int>(new ReadQuantityCoroutine());
         yield return readQuantity;
         var count = readQuantity.Result;
 
-        var readDate = new CommandLineEffect.Call<DateTime>(new ReadDateCoroutine());
+        var readDate = new Call<DateTime>(new ReadDateCoroutine());
         yield return readDate;
         var date = readDate.Result;
 
-        var readName = new CommandLineEffect.Call<string>(new ReadNameCoroutine());
+        var readName = new Call<string>(new ReadNameCoroutine());
         yield return readName;
         var name = readName.Result ?? throw new InvalidOperationException();
 
-        var readEmail = new CommandLineEffect.Call<string>(new ReadEmailCoroutine());
+        var readEmail = new Call<string>(new ReadEmailCoroutine());
         yield return readEmail;
         var email = readEmail.Result ?? throw new InvalidOperationException();
 

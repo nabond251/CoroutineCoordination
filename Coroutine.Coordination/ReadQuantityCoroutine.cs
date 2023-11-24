@@ -1,13 +1,13 @@
 ﻿namespace Coroutine.Coordination;
 
-public class ReadQuantityCoroutine : CommandLineCoroutine<int>
+public class ReadQuantityCoroutine : Coroutine<int>
 {
-    public override IEnumerator<CommandLineEffect> GetEnumerator()
+    public override IEnumerator<IEffect> GetEnumerator()
     {
-        yield return new CommandLineEffect.WriteLine(
+        yield return new WriteLine(
             "Please enter number of diners:");
 
-        var quantity = new CommandLineEffect.ReadLine();
+        var quantity = new ReadLine();
         yield return quantity;
         var l = quantity.Result;
 
@@ -17,10 +17,10 @@ public class ReadQuantityCoroutine : CommandLineCoroutine<int>
         }
         else
         {
-            yield return new CommandLineEffect.WriteLine(
+            yield return new WriteLine(
                 "Not an integer.");
 
-            var readQuantity = new CommandLineEffect.Call<int>(
+            var readQuantity = new Call<int>(
                 new ReadQuantityCoroutine());
             yield return readQuantity;
             Result = readQuantity.Result;

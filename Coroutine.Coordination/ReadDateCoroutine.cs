@@ -1,26 +1,28 @@
 ﻿namespace Coroutine.Coordination;
 
-public class ReadDateCoroutine : CommandLineCoroutine<DateTime>
+using System.Globalization;
+
+public class ReadDateCoroutine : Coroutine<DateTime>
 {
-    public override IEnumerator<CommandLineEffect> GetEnumerator()
+    public override IEnumerator<IEffect> GetEnumerator()
     {
-        yield return new CommandLineEffect.WriteLine(
+        yield return new WriteLine(
             "Please enter your desired date:");
 
-        var date = new CommandLineEffect.ReadLine();
+        var date = new ReadLine();
         yield return date;
         var l = date.Result;
 
-        if (DateTime.TryParse(l, out var dt))
+        if (DateTime.TryParse(l, CultureInfo.CurrentCulture, out var dt))
         {
             Result = dt;
         }
         else
         {
-            yield return new CommandLineEffect.WriteLine(
+            yield return new WriteLine(
                 "Not a date.");
 
-            var readDate = new CommandLineEffect.Call<DateTime>(
+            var readDate = new Call<DateTime>(
                 new ReadDateCoroutine());
             yield return readDate;
             Result = readDate.Result;

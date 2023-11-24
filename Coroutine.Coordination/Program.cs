@@ -2,5 +2,5 @@
 using Coroutine.Coordination;
 
 Console.WriteLine(
-    CommandLineInterpreter.Interpret(
+    await Interpreter.InterpretAsync(
         new ReadReservationRequestCoroutine()));
