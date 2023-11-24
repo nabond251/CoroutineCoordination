@@ -1,6 +1,6 @@
 ﻿namespace Coroutine;
 
-public static class CommandLineInterpreter
+public static class Interpreter
 {
     public static T? Interpret<T>(Coroutine<T> program)
     {
