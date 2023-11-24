@@ -9,15 +9,15 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
-        Assert.Equal(new CommandLineEffect.WriteLine("Please enter your name."), enumerator.Current);
+        Assert.Equal(new WriteLine("Please enter your name."), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var name = enumerator.Current as CommandLineEffect.ReadLine;
+        var name = enumerator.Current as ReadLine;
         Assert.NotNull(name);
         name.Result = "Nathan";
 
         Assert.True(enumerator.MoveNext(), "Did not greet");
-        Assert.Equal(new CommandLineEffect.WriteLine("Hello, Nathan!"), enumerator.Current);
+        Assert.Equal(new WriteLine("Hello, Nathan!"), enumerator.Current);
 
         Assert.False(enumerator.MoveNext());
     }
@@ -29,18 +29,18 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
-        Assert.Equal(new CommandLineEffect.WriteLine("Please enter number of diners:"), enumerator.Current);
+        Assert.Equal(new WriteLine("Please enter number of diners:"), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var diner1 = enumerator.Current as CommandLineEffect.ReadLine;
+        var diner1 = enumerator.Current as ReadLine;
         Assert.NotNull(diner1);
         diner1.Result = "two";
 
         Assert.True(enumerator.MoveNext(), "Did not reject prompt response");
-        Assert.Equal(new CommandLineEffect.WriteLine("Not an integer."), enumerator.Current);
+        Assert.Equal(new WriteLine("Not an integer."), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not recurse");
-        var readQuantity = enumerator.Current as CommandLineEffect.Call<int>;
+        var readQuantity = enumerator.Current as Call<int>;
         Assert.NotNull(readQuantity);
         readQuantity.Result = 2;
 
@@ -55,10 +55,10 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
-        Assert.Equal(new CommandLineEffect.WriteLine("Please enter number of diners:"), enumerator.Current);
+        Assert.Equal(new WriteLine("Please enter number of diners:"), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var diner2 = enumerator.Current as CommandLineEffect.ReadLine;
+        var diner2 = enumerator.Current as ReadLine;
         Assert.NotNull(diner2);
         diner2.Result = "2";
 
@@ -73,18 +73,18 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
-        Assert.Equal(new CommandLineEffect.WriteLine("Please enter your desired date:"), enumerator.Current);
+        Assert.Equal(new WriteLine("Please enter your desired date:"), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var date1 = enumerator.Current as CommandLineEffect.ReadLine;
+        var date1 = enumerator.Current as ReadLine;
         Assert.NotNull(date1);
         date1.Result = "When we get a babysitter";
 
         Assert.True(enumerator.MoveNext(), "Did not reject prompt response");
-        Assert.Equal(new CommandLineEffect.WriteLine("Not a date."), enumerator.Current);
+        Assert.Equal(new WriteLine("Not a date."), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not recurse");
-        var readDate = enumerator.Current as CommandLineEffect.Call<DateTime>;
+        var readDate = enumerator.Current as Call<DateTime>;
         Assert.NotNull(readDate);
         var date = DateTime.Parse("11-28-2023");
         readDate.Result = date;
@@ -100,10 +100,10 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
-        Assert.Equal(new CommandLineEffect.WriteLine("Please enter your desired date:"), enumerator.Current);
+        Assert.Equal(new WriteLine("Please enter your desired date:"), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var date2 = enumerator.Current as CommandLineEffect.ReadLine;
+        var date2 = enumerator.Current as ReadLine;
         Assert.NotNull(date2);
         date2.Result = "11-28-2023";
 
@@ -118,10 +118,10 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
-        Assert.Equal(new CommandLineEffect.WriteLine("Please enter your name:"), enumerator.Current);
+        Assert.Equal(new WriteLine("Please enter your name:"), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var name = enumerator.Current as CommandLineEffect.ReadLine;
+        var name = enumerator.Current as ReadLine;
         Assert.NotNull(name);
         name.Result = "Nathan Bond";
 
@@ -136,10 +136,10 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not display prompt");
-        Assert.Equal(new CommandLineEffect.WriteLine("Please enter your email address:"), enumerator.Current);
+        Assert.Equal(new WriteLine("Please enter your email address:"), enumerator.Current);
 
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
-        var email = enumerator.Current as CommandLineEffect.ReadLine;
+        var email = enumerator.Current as ReadLine;
         Assert.NotNull(email);
         email.Result = "nathan@example.com";
 
@@ -154,22 +154,22 @@ public class CoroutineCommandLineTests
         var enumerator = program.GetEnumerator();
 
         Assert.True(enumerator.MoveNext(), "Did not read quantity");
-        var readQuantity = enumerator.Current as CommandLineEffect.Call<int>;
+        var readQuantity = enumerator.Current as Call<int>;
         Assert.NotNull(readQuantity);
         readQuantity.Result = 2;
 
         Assert.True(enumerator.MoveNext(), "Did not read date");
-        var readDate = enumerator.Current as CommandLineEffect.Call<DateTime>;
+        var readDate = enumerator.Current as Call<DateTime>;
         Assert.NotNull(readDate);
         readDate.Result = DateTime.Parse("11-28-2023");
 
         Assert.True(enumerator.MoveNext(), "Did not read name");
-        var readName = enumerator.Current as CommandLineEffect.Call<string>;
+        var readName = enumerator.Current as Call<string>;
         Assert.NotNull(readName);
         readName.Result = "Nathan Bond";
 
         Assert.True(enumerator.MoveNext(), "Did not read email");
-        var readEmail = enumerator.Current as CommandLineEffect.Call<string>;
+        var readEmail = enumerator.Current as Call<string>;
         Assert.NotNull(readEmail);
         readEmail.Result = "nathan@example.com";
 

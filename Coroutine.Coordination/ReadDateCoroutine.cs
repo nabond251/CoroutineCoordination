@@ -2,12 +2,12 @@
 
 public class ReadDateCoroutine : CommandLineCoroutine<DateTime>
 {
-    public override IEnumerator<CommandLineEffect> GetEnumerator()
+    public override IEnumerator<IEffect> GetEnumerator()
     {
-        yield return new CommandLineEffect.WriteLine(
+        yield return new WriteLine(
             "Please enter your desired date:");
 
-        var date = new CommandLineEffect.ReadLine();
+        var date = new ReadLine();
         yield return date;
         var l = date.Result;
 
@@ -17,10 +17,10 @@ public class ReadDateCoroutine : CommandLineCoroutine<DateTime>
         }
         else
         {
-            yield return new CommandLineEffect.WriteLine(
+            yield return new WriteLine(
                 "Not a date.");
 
-            var readDate = new CommandLineEffect.Call<DateTime>(
+            var readDate = new Call<DateTime>(
                 new ReadDateCoroutine());
             yield return readDate;
             Result = readDate.Result;

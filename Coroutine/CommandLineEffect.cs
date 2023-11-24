@@ -1,41 +1,34 @@
 ﻿namespace Coroutine;
 
-public abstract record CommandLineEffect : IEffect
+public record ReadLine() : IEffect<string>
 {
-    public record ReadLine() : CommandLineEffect(), IEffect<string>
+    public string? Result { get; set; }
+
+    public void Execute()
     {
-        public string? Result { get; set; }
-
-        public override void Execute()
-        {
-            Result = Console.ReadLine();
-        }
+        Result = Console.ReadLine();
     }
+}
 
-    public record WriteLine(string Text) : CommandLineEffect()
+public record WriteLine(string Text) : IEffect
+{
+    public void Execute()
     {
-        public override void Execute()
-        {
-            Console.WriteLine(Text);
-        }
+        Console.WriteLine(Text);
     }
+}
 
-    public record Call<T>(CommandLineCoroutine<T> Program) : CommandLineEffect(), IEffect<T>
+public record Call<T>(CommandLineCoroutine<T> Program) : IEffect<T>
+{
+    public T? Result { get; set; }
+
+    public void Execute()
     {
-        public T? Result { get; set; }
-
-        public override void Execute()
+        foreach (var i in Program)
         {
-            foreach (var i in Program)
-            {
-                i.Execute();
-            }
-
-            Result = Program.Result;
+            i.Execute();
         }
+
+        Result = Program.Result;
     }
-
-    private CommandLineEffect() { }
-
-    public abstract void Execute();
 }

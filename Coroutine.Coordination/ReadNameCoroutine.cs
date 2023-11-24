@@ -2,12 +2,12 @@
 
 public class ReadNameCoroutine : CommandLineCoroutine<string>
 {
-    public override IEnumerator<CommandLineEffect> GetEnumerator()
+    public override IEnumerator<IEffect> GetEnumerator()
     {
-        yield return new CommandLineEffect.WriteLine(
+        yield return new WriteLine(
             "Please enter your name:");
 
-        var name = new CommandLineEffect.ReadLine();
+        var name = new ReadLine();
         yield return name;
         Result = name.Result;
     }

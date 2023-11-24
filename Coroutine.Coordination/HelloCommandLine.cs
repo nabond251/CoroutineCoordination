@@ -2,13 +2,13 @@
 
 public class HelloCommandLine : CommandLineCoroutine<Unit>
 {
-    public override IEnumerator<CommandLineEffect> GetEnumerator()
+    public override IEnumerator<IEffect> GetEnumerator()
     {
-        yield return new CommandLineEffect.WriteLine("Please enter your name.");
+        yield return new WriteLine("Please enter your name.");
 
-        var nameEffect = new CommandLineEffect.ReadLine();
+        var nameEffect = new ReadLine();
         yield return nameEffect;
 
-        yield return new CommandLineEffect.WriteLine($"Hello, {nameEffect.Result}!");
+        yield return new WriteLine($"Hello, {nameEffect.Result}!");
     }
 }
