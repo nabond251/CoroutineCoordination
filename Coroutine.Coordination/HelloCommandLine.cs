@@ -1,6 +1,6 @@
 ﻿namespace Coroutine.Coordination;
 
-public class HelloCommandLine : BaseCoroutine<Unit>
+public class HelloCommandLine : Coroutine<Unit>
 {
     public override IEnumerator<IEffect> GetEnumerator()
     {

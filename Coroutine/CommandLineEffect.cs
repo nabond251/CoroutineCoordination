@@ -18,7 +18,7 @@ public record WriteLine(string Text) : IEffect
     }
 }
 
-public record Call<T>(BaseCoroutine<T> Program) : IEffect<T>
+public record Call<T>(Coroutine<T> Program) : IEffect<T>
 {
     public T? Result { get; set; }
 

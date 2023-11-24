@@ -2,7 +2,7 @@
 
 using System.Collections;
 
-public abstract class BaseCoroutine<T> : IEnumerable<IEffect>
+public abstract class Coroutine<T> : IEnumerable<IEffect>
 {
     public T? Result { get; protected set; }
 

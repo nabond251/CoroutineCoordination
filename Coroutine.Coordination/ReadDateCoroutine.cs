@@ -1,6 +1,6 @@
 ﻿namespace Coroutine.Coordination;
 
-public class ReadDateCoroutine : BaseCoroutine<DateTime>
+public class ReadDateCoroutine : Coroutine<DateTime>
 {
     public override IEnumerator<IEffect> GetEnumerator()
     {

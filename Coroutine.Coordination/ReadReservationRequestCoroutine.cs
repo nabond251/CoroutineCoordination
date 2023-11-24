@@ -1,6 +1,6 @@
 ﻿namespace Coroutine.Coordination;
 
-public class ReadReservationRequestCoroutine : BaseCoroutine<Reservation>
+public class ReadReservationRequestCoroutine : Coroutine<Reservation>
 {
     public override IEnumerator<IEffect> GetEnumerator()
     {

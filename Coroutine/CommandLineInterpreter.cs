@@ -2,7 +2,7 @@
 
 public static class CommandLineInterpreter
 {
-    public static T? Interpret<T>(BaseCoroutine<T> program)
+    public static T? Interpret<T>(Coroutine<T> program)
     {
         foreach (var i in program)
         {
