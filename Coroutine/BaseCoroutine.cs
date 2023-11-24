@@ -2,11 +2,11 @@
 
 using System.Collections;
 
-public abstract class BaseCoroutine<T, TReturn> : IEnumerable<T>
+public abstract class BaseCoroutine<T> : IEnumerable<IEffect>
 {
-    public TReturn? Result { get; protected set; }
+    public T? Result { get; protected set; }
 
-    public abstract IEnumerator<T> GetEnumerator();
+    public abstract IEnumerator<IEffect> GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() =>
         this.GetEnumerator();

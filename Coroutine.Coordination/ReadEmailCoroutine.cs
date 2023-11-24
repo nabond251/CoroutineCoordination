@@ -1,6 +1,6 @@
 ﻿namespace Coroutine.Coordination;
 
-public class ReadEmailCoroutine : CommandLineCoroutine<string>
+public class ReadEmailCoroutine : BaseCoroutine<string>
 {
     public override IEnumerator<IEffect> GetEnumerator()
     {
