@@ -1,4 +1,4 @@
 ﻿using Coroutine;
 using Coroutine.Coordination;
 
-Interpreter.Interpret(new HelloCommandLine());
+await Interpreter.InterpretAsync(new HelloCommandLine());

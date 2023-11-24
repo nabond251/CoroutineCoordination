@@ -4,8 +4,8 @@ public record ReadLine() : IEffect<string>
 {
     public string? Result { get; set; }
 
-    public void Execute()
+    public async Task ExecuteAsync()
     {
-        Result = Console.ReadLine();
+        Result = await Task.FromResult(Console.ReadLine());
     }
 }

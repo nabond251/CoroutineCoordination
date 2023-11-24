@@ -2,11 +2,11 @@
 
 public static class Interpreter
 {
-    public static T? Interpret<T>(Coroutine<T> program)
+    public static async Task<T?> InterpretAsync<T>(Coroutine<T> program)
     {
         foreach (var i in program)
         {
-            i.Execute();
+            await i.ExecuteAsync();
         }
 
         return program.Result;

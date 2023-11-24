@@ -4,11 +4,11 @@ public record Call<T>(Coroutine<T> Program) : IEffect<T>
 {
     public T? Result { get; set; }
 
-    public void Execute()
+    public async Task ExecuteAsync()
     {
         foreach (var i in Program)
         {
-            i.Execute();
+            await i.ExecuteAsync();
         }
 
         Result = Program.Result;

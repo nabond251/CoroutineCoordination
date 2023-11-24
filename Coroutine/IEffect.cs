@@ -2,5 +2,5 @@
 
 public interface IEffect
 {
-    void Execute();
+    Task ExecuteAsync();
 }
