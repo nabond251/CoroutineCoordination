@@ -2,17 +2,18 @@
 
 public static class Interpreter
 {
-    public static async Task<T?> InterpretAsync<T>(Coroutine<T> program)
+    public static async Task<IEnumerable<T?>> InterpretAsync<T>(Coroutine<T> program)
     {
+        var retVal = new List<T?>();
         foreach (var i in program)
         {
             await i.ExecuteAsync();
             if (i is Coroutine<T>.Result r)
             {
-                return r.Value;
+                retVal.Add(r.Value);
             }
         }
 
-        throw new InvalidOperationException();
+        return retVal;
     }
 }

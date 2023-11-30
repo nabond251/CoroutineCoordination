@@ -1,8 +1,8 @@
 ﻿namespace Coroutine;
 
-public record Call<T>(Coroutine<T> Program) : IEffect<T>
+public record Call<T>(Coroutine<T> Program) : IEffect<IEnumerable<T?>>
 {
-    public T? Result { get; set; }
+    public IEnumerable<T?>? Result { get; set; }
 
     public async Task ExecuteAsync()
     {

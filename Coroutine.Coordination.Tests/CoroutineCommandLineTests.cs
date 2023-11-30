@@ -44,7 +44,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not recurse");
         var readQuantity = enumerator.Current as Call<int>;
         Assert.NotNull(readQuantity);
-        readQuantity.Result = 2;
+        readQuantity.Result = new List<int> { 2 };
 
         Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(new Coroutine<int>.Result(2), enumerator.Current);
@@ -93,7 +93,7 @@ public class CoroutineCommandLineTests
         var readDate = enumerator.Current as Call<DateTime>;
         Assert.NotNull(readDate);
         var date = DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture);
-        readDate.Result = date;
+        readDate.Result = new List<DateTime> { date };
 
         Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(new Coroutine<DateTime>.Result(date), enumerator.Current);
@@ -174,22 +174,25 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not read quantity");
         var readQuantity = enumerator.Current as Call<int>;
         Assert.NotNull(readQuantity);
-        readQuantity.Result = 2;
+        readQuantity.Result = new List<int> { 2 };
 
         Assert.True(enumerator.MoveNext(), "Did not read date");
         var readDate = enumerator.Current as Call<DateTime>;
         Assert.NotNull(readDate);
-        readDate.Result = DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture);
+        readDate.Result = new List<DateTime>
+        {
+            DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture)
+        };
 
         Assert.True(enumerator.MoveNext(), "Did not read name");
         var readName = enumerator.Current as Call<string>;
         Assert.NotNull(readName);
-        readName.Result = "Nathan Bond";
+        readName.Result = new List<string> { "Nathan Bond" };
 
         Assert.True(enumerator.MoveNext(), "Did not read email");
         var readEmail = enumerator.Current as Call<string>;
         Assert.NotNull(readEmail);
-        readEmail.Result = "nathan@example.com";
+        readEmail.Result = new List<string> { "nathan@example.com" };
 
         Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(

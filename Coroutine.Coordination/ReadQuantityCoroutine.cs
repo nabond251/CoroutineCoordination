@@ -1,5 +1,7 @@
 ﻿namespace Coroutine.Coordination;
 
+using System.Linq;
+
 public class ReadQuantityCoroutine : Coroutine<int>
 {
     public override IEnumerator<IEffect> GetEnumerator()
@@ -24,7 +26,7 @@ public class ReadQuantityCoroutine : Coroutine<int>
                 new ReadQuantityCoroutine());
             yield return readQuantity;
 
-            yield return new Result(readQuantity.Result);
+            yield return new Result(readQuantity.Result!.Single());
         }
     }
 }

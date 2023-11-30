@@ -26,7 +26,9 @@ public class ReadDateCoroutine : Coroutine<DateTime>
                 new ReadDateCoroutine());
             yield return readDate;
 
-            yield return new Result(readDate.Result);
+            yield return new Result(
+                readDate.Result?.Single() ??
+                throw new InvalidOperationException());
         }
     }
 }
