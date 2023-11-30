@@ -1,6 +1,6 @@
 ﻿namespace Coroutine;
 
-public record Call<T>(Coroutine<T> Program) : IEffect<IEnumerable<T>>
+public record Call<T>(Coroutine<T> Program) : IEffect<T>
 {
     public IEnumerable<T> Result { get; set; } = Enumerable.Empty<T>();
 

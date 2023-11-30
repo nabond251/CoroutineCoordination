@@ -16,7 +16,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var name = enumerator.Current as ReadLine;
         Assert.NotNull(name);
-        name.Result = "Nathan";
+        name.Result = new List<string?> { "Nathan" };
 
         Assert.True(enumerator.MoveNext(), "Did not greet");
         Assert.Equal(new WriteLine("Hello, Nathan!"), enumerator.Current);
@@ -36,7 +36,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var diner1 = enumerator.Current as ReadLine;
         Assert.NotNull(diner1);
-        diner1.Result = "two";
+        diner1.Result = new List<string?> { "two" };
 
         Assert.True(enumerator.MoveNext(), "Did not reject prompt response");
         Assert.Equal(new WriteLine("Not an integer."), enumerator.Current);
@@ -64,7 +64,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var diner2 = enumerator.Current as ReadLine;
         Assert.NotNull(diner2);
-        diner2.Result = "2";
+        diner2.Result = new List<string?> { "2" };
 
         Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(new Coroutine<int>.Result(2), enumerator.Current);
@@ -84,7 +84,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var date1 = enumerator.Current as ReadLine;
         Assert.NotNull(date1);
-        date1.Result = "When we get a babysitter";
+        date1.Result = new List<string?> { "When we get a babysitter" };
 
         Assert.True(enumerator.MoveNext(), "Did not reject prompt response");
         Assert.Equal(new WriteLine("Not a date."), enumerator.Current);
@@ -113,7 +113,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var date2 = enumerator.Current as ReadLine;
         Assert.NotNull(date2);
-        date2.Result = "11-28-2023";
+        date2.Result = new List<string?> { "11-28-2023" };
 
         Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(
@@ -137,7 +137,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var name = enumerator.Current as ReadLine;
         Assert.NotNull(name);
-        name.Result = "Nathan Bond";
+        name.Result = new List<string?> { "Nathan Bond" };
 
         Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(new Coroutine<string>.Result("Nathan Bond"), enumerator.Current);
@@ -157,7 +157,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var email = enumerator.Current as ReadLine;
         Assert.NotNull(email);
-        email.Result = "nathan@example.com";
+        email.Result = new List<string?> { "nathan@example.com" };
 
         Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(new Coroutine<string>.Result("nathan@example.com"), enumerator.Current);

@@ -13,7 +13,7 @@ public class ReadQuantityCoroutine : Coroutine<int>
         yield return quantity;
         var l = quantity.Result;
 
-        if (int.TryParse(l, out var dinerCount))
+        if (int.TryParse(l.Single(), out var dinerCount))
         {
             yield return new Result(dinerCount);
         }
