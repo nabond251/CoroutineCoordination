@@ -20,6 +20,6 @@ public class ReadReservationRequestCoroutine : Coroutine<Reservation>
         yield return readEmail;
         var email = readEmail.Result ?? throw new InvalidOperationException();
 
-        yield return new Return(new Reservation(date, name, email, count));
+        yield return new Result(new Reservation(date, name, email, count));
     }
 }

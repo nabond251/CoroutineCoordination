@@ -10,20 +10,20 @@ public abstract class Coroutine<T> : IEnumerable<IEffect>
     IEnumerator IEnumerable.GetEnumerator() =>
         this.GetEnumerator();
 
-    public record Return : IEffect<T>
+    public record Result : IEffect
     {
-        private readonly T? result;
+        private readonly T? value;
 
-        public Return(T? result)
+        public Result(T? value)
         {
-            this.result = result;
+            this.value = value;
         }
 
-        public T? Result { get; private set; }
+        public T? Value { get; private set; }
 
         public Task ExecuteAsync()
         {
-            this.Result = this.result;
+            this.Value = this.value;
             return Task.CompletedTask;
         }
     }

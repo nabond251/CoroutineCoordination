@@ -10,6 +10,6 @@ public class ReadNameCoroutine : Coroutine<string>
         var name = new ReadLine();
         yield return name;
 
-        yield return new Return(name.Result);
+        yield return new Result(name.Result);
     }
 }

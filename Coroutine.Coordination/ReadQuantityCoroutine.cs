@@ -13,7 +13,7 @@ public class ReadQuantityCoroutine : Coroutine<int>
 
         if (int.TryParse(l, out var dinerCount))
         {
-            yield return new Return(dinerCount);
+            yield return new Result(dinerCount);
         }
         else
         {
@@ -24,7 +24,7 @@ public class ReadQuantityCoroutine : Coroutine<int>
                 new ReadQuantityCoroutine());
             yield return readQuantity;
 
-            yield return new Return(readQuantity.Result);
+            yield return new Result(readQuantity.Result);
         }
     }
 }
