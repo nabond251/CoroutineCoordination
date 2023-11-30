@@ -46,8 +46,10 @@ public class CoroutineCommandLineTests
         Assert.NotNull(readQuantity);
         readQuantity.Result = 2;
 
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<int>.Return(2), enumerator.Current);
+
         Assert.False(enumerator.MoveNext());
-        Assert.Equal(2, program.Result);
     }
 
     [Fact]
@@ -64,8 +66,10 @@ public class CoroutineCommandLineTests
         Assert.NotNull(diner2);
         diner2.Result = "2";
 
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<int>.Return(2), enumerator.Current);
+
         Assert.False(enumerator.MoveNext());
-        Assert.Equal(2, program.Result);
     }
 
     [Fact]
@@ -91,8 +95,10 @@ public class CoroutineCommandLineTests
         var date = DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture);
         readDate.Result = date;
 
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<DateTime>.Return(date), enumerator.Current);
+
         Assert.False(enumerator.MoveNext());
-        Assert.Equal(date, program.Result);
     }
 
     [Fact]
@@ -109,10 +115,14 @@ public class CoroutineCommandLineTests
         Assert.NotNull(date2);
         date2.Result = "11-28-2023";
 
-        Assert.False(enumerator.MoveNext());
+        Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(
-            DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture),
-            program.Result);
+            new Coroutine<DateTime>.Return(
+                DateTime.Parse("11-28-2023",
+                CultureInfo.InvariantCulture)),
+            enumerator.Current);
+
+        Assert.False(enumerator.MoveNext());
     }
 
     [Fact]
@@ -129,8 +139,10 @@ public class CoroutineCommandLineTests
         Assert.NotNull(name);
         name.Result = "Nathan Bond";
 
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<string>.Return("Nathan Bond"), enumerator.Current);
+
         Assert.False(enumerator.MoveNext());
-        Assert.Equal("Nathan Bond", program.Result);
     }
 
     [Fact]
@@ -147,8 +159,10 @@ public class CoroutineCommandLineTests
         Assert.NotNull(email);
         email.Result = "nathan@example.com";
 
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<string>.Return("nathan@example.com"), enumerator.Current);
+
         Assert.False(enumerator.MoveNext());
-        Assert.Equal("nathan@example.com", program.Result);
     }
 
     [Fact]
@@ -177,13 +191,15 @@ public class CoroutineCommandLineTests
         Assert.NotNull(readEmail);
         readEmail.Result = "nathan@example.com";
 
-        Assert.False(enumerator.MoveNext());
+        Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(
-            new Reservation(
+            new Coroutine<Reservation>.Return(new Reservation(
                 DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture),
                 "Nathan Bond",
                 "nathan@example.com",
-                2),
-            program.Result);
+                2)),
+            enumerator.Current);
+
+        Assert.False(enumerator.MoveNext());
     }
 }

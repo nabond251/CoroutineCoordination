@@ -9,6 +9,7 @@ public class ReadEmailCoroutine : Coroutine<string>
 
         var email = new ReadLine();
         yield return email;
-        Result = email.Result;
+
+        yield return new Return(email.Result);
     }
 }

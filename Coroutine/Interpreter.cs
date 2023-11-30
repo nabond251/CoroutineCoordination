@@ -7,8 +7,12 @@ public static class Interpreter
         foreach (var i in program)
         {
             await i.ExecuteAsync();
+            if (i is Coroutine<T>.Return r)
+            {
+                return r.Result;
+            }
         }
 
-        return program.Result;
+        throw new InvalidOperationException();
     }
 }
