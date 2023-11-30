@@ -6,11 +6,6 @@ public record Call<T>(Coroutine<T> Program) : IEffect<T>
 
     public async Task ExecuteAsync()
     {
-        foreach (var i in Program)
-        {
-            await i.ExecuteAsync();
-        }
-
-        Result = Program.Result;
+        this.Result = await Interpreter.InterpretAsync(this.Program);
     }
 }
