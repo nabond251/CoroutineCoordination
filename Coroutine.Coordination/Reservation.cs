@@ -2,6 +2,6 @@
 
 public record Reservation(
     DateTime Date,
-    string Name,
-    string Email,
+    string? Name,
+    string? Email,
     int Quantity);

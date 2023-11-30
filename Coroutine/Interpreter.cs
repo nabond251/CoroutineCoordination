@@ -2,9 +2,9 @@
 
 public static class Interpreter
 {
-    public static async Task<IEnumerable<T?>> InterpretAsync<T>(Coroutine<T> program)
+    public static async Task<IEnumerable<T>> InterpretAsync<T>(Coroutine<T> program)
     {
-        async IAsyncEnumerable<T?> GetEnumerableAsync()
+        async IAsyncEnumerable<T> GetEnumerableAsync()
         {
             foreach (var i in program)
             {

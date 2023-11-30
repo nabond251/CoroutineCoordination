@@ -1,6 +1,6 @@
 ﻿namespace Coroutine;
 
-public record ReadLine() : IEffect<string>
+public record ReadLine() : IEffect<string?>
 {
     public string? Result { get; set; }
 
