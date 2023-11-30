@@ -10,21 +10,9 @@ public abstract class Coroutine<T> : IEnumerable<IEffect>
     IEnumerator IEnumerable.GetEnumerator() =>
         this.GetEnumerator();
 
-    public record Result : IEffect
+    public record Result(T? Value) : IEffect
     {
-        private readonly T? value;
-
-        public Result(T? value)
-        {
-            this.value = value;
-        }
-
-        public T? Value { get; private set; }
-
-        public Task ExecuteAsync()
-        {
-            this.Value = this.value;
-            return Task.CompletedTask;
-        }
+        public Task ExecuteAsync() =>
+            Task.CompletedTask;
     }
 }
