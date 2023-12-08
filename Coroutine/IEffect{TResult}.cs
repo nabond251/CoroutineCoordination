@@ -2,5 +2,5 @@
 
 public interface IEffect<out TResult> : IEffect
 {
-    TResult? Result { get; }
+    IEnumerable<TResult> Result { get; }
 }

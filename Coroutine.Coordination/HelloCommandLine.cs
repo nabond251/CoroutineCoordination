@@ -9,6 +9,6 @@ public class HelloCommandLine : Coroutine<Unit>
         var nameEffect = new ReadLine();
         yield return nameEffect;
 
-        yield return new WriteLine($"Hello, {nameEffect.Result}!");
+        yield return new WriteLine($"Hello, {nameEffect.Result.Single()}!");
     }
 }

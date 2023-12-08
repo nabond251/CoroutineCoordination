@@ -2,15 +2,10 @@
 
 public record Call<T>(Coroutine<T> Program) : IEffect<T>
 {
-    public T? Result { get; set; }
+    public IEnumerable<T> Result { get; set; } = Enumerable.Empty<T>();
 
     public async Task ExecuteAsync()
     {
-        foreach (var i in Program)
-        {
-            await i.ExecuteAsync();
-        }
-
-        Result = Program.Result;
+        this.Result = await Interpreter.InterpretAsync(this.Program);
     }
 }

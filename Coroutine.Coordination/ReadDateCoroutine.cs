@@ -13,9 +13,9 @@ public class ReadDateCoroutine : Coroutine<DateTime>
         yield return date;
         var l = date.Result;
 
-        if (DateTime.TryParse(l, CultureInfo.CurrentCulture, out var dt))
+        if (DateTime.TryParse(l.Single(), CultureInfo.CurrentCulture, out var dt))
         {
-            Result = dt;
+            yield return new Result(dt);
         }
         else
         {
@@ -25,7 +25,8 @@ public class ReadDateCoroutine : Coroutine<DateTime>
             var readDate = new Call<DateTime>(
                 new ReadDateCoroutine());
             yield return readDate;
-            Result = readDate.Result;
+
+            yield return new Result(readDate.Result.Single());
         }
     }
 }

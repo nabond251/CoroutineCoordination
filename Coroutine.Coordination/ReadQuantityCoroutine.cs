@@ -1,5 +1,7 @@
 ﻿namespace Coroutine.Coordination;
 
+using System.Linq;
+
 public class ReadQuantityCoroutine : Coroutine<int>
 {
     public override IEnumerator<IEffect> GetEnumerator()
@@ -11,9 +13,9 @@ public class ReadQuantityCoroutine : Coroutine<int>
         yield return quantity;
         var l = quantity.Result;
 
-        if (int.TryParse(l, out var dinerCount))
+        if (int.TryParse(l.Single(), out var dinerCount))
         {
-            Result = dinerCount;
+            yield return new Result(dinerCount);
         }
         else
         {
@@ -23,7 +25,8 @@ public class ReadQuantityCoroutine : Coroutine<int>
             var readQuantity = new Call<int>(
                 new ReadQuantityCoroutine());
             yield return readQuantity;
-            Result = readQuantity.Result;
+
+            yield return new Result(readQuantity.Result!.Single());
         }
     }
 }

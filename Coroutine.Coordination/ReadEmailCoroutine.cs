@@ -1,6 +1,6 @@
 ﻿namespace Coroutine.Coordination;
 
-public class ReadEmailCoroutine : Coroutine<string>
+public class ReadEmailCoroutine : Coroutine<string?>
 {
     public override IEnumerator<IEffect> GetEnumerator()
     {
@@ -9,6 +9,7 @@ public class ReadEmailCoroutine : Coroutine<string>
 
         var email = new ReadLine();
         yield return email;
-        Result = email.Result;
+
+        yield return new Result(email.Result.Single());
     }
 }

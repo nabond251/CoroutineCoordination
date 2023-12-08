@@ -16,7 +16,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var name = enumerator.Current as ReadLine;
         Assert.NotNull(name);
-        name.Result = "Nathan";
+        name.Result = new List<string?> { "Nathan" };
 
         Assert.True(enumerator.MoveNext(), "Did not greet");
         Assert.Equal(new WriteLine("Hello, Nathan!"), enumerator.Current);
@@ -36,7 +36,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var diner1 = enumerator.Current as ReadLine;
         Assert.NotNull(diner1);
-        diner1.Result = "two";
+        diner1.Result = new List<string?> { "two" };
 
         Assert.True(enumerator.MoveNext(), "Did not reject prompt response");
         Assert.Equal(new WriteLine("Not an integer."), enumerator.Current);
@@ -44,10 +44,12 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not recurse");
         var readQuantity = enumerator.Current as Call<int>;
         Assert.NotNull(readQuantity);
-        readQuantity.Result = 2;
+        readQuantity.Result = new List<int> { 2 };
+
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<int>.Result(2), enumerator.Current);
 
         Assert.False(enumerator.MoveNext());
-        Assert.Equal(2, program.Result);
     }
 
     [Fact]
@@ -62,10 +64,12 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var diner2 = enumerator.Current as ReadLine;
         Assert.NotNull(diner2);
-        diner2.Result = "2";
+        diner2.Result = new List<string?> { "2" };
+
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<int>.Result(2), enumerator.Current);
 
         Assert.False(enumerator.MoveNext());
-        Assert.Equal(2, program.Result);
     }
 
     [Fact]
@@ -80,7 +84,7 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var date1 = enumerator.Current as ReadLine;
         Assert.NotNull(date1);
-        date1.Result = "When we get a babysitter";
+        date1.Result = new List<string?> { "When we get a babysitter" };
 
         Assert.True(enumerator.MoveNext(), "Did not reject prompt response");
         Assert.Equal(new WriteLine("Not a date."), enumerator.Current);
@@ -89,10 +93,12 @@ public class CoroutineCommandLineTests
         var readDate = enumerator.Current as Call<DateTime>;
         Assert.NotNull(readDate);
         var date = DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture);
-        readDate.Result = date;
+        readDate.Result = new List<DateTime> { date };
+
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<DateTime>.Result(date), enumerator.Current);
 
         Assert.False(enumerator.MoveNext());
-        Assert.Equal(date, program.Result);
     }
 
     [Fact]
@@ -107,12 +113,16 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var date2 = enumerator.Current as ReadLine;
         Assert.NotNull(date2);
-        date2.Result = "11-28-2023";
+        date2.Result = new List<string?> { "11-28-2023" };
+
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(
+            new Coroutine<DateTime>.Result(
+                DateTime.Parse("11-28-2023",
+                CultureInfo.InvariantCulture)),
+            enumerator.Current);
 
         Assert.False(enumerator.MoveNext());
-        Assert.Equal(
-            DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture),
-            program.Result);
     }
 
     [Fact]
@@ -127,10 +137,12 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var name = enumerator.Current as ReadLine;
         Assert.NotNull(name);
-        name.Result = "Nathan Bond";
+        name.Result = new List<string?> { "Nathan Bond" };
+
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<string>.Result("Nathan Bond"), enumerator.Current);
 
         Assert.False(enumerator.MoveNext());
-        Assert.Equal("Nathan Bond", program.Result);
     }
 
     [Fact]
@@ -145,10 +157,12 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not receive prompt response");
         var email = enumerator.Current as ReadLine;
         Assert.NotNull(email);
-        email.Result = "nathan@example.com";
+        email.Result = new List<string?> { "nathan@example.com" };
+
+        Assert.True(enumerator.MoveNext(), "Did not return");
+        Assert.Equal(new Coroutine<string>.Result("nathan@example.com"), enumerator.Current);
 
         Assert.False(enumerator.MoveNext());
-        Assert.Equal("nathan@example.com", program.Result);
     }
 
     [Fact]
@@ -160,30 +174,35 @@ public class CoroutineCommandLineTests
         Assert.True(enumerator.MoveNext(), "Did not read quantity");
         var readQuantity = enumerator.Current as Call<int>;
         Assert.NotNull(readQuantity);
-        readQuantity.Result = 2;
+        readQuantity.Result = new List<int> { 2 };
 
         Assert.True(enumerator.MoveNext(), "Did not read date");
         var readDate = enumerator.Current as Call<DateTime>;
         Assert.NotNull(readDate);
-        readDate.Result = DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture);
+        readDate.Result = new List<DateTime>
+        {
+            DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture)
+        };
 
         Assert.True(enumerator.MoveNext(), "Did not read name");
         var readName = enumerator.Current as Call<string>;
         Assert.NotNull(readName);
-        readName.Result = "Nathan Bond";
+        readName.Result = new List<string> { "Nathan Bond" };
 
         Assert.True(enumerator.MoveNext(), "Did not read email");
         var readEmail = enumerator.Current as Call<string>;
         Assert.NotNull(readEmail);
-        readEmail.Result = "nathan@example.com";
+        readEmail.Result = new List<string> { "nathan@example.com" };
 
-        Assert.False(enumerator.MoveNext());
+        Assert.True(enumerator.MoveNext(), "Did not return");
         Assert.Equal(
-            new Reservation(
+            new Coroutine<Reservation>.Result(new Reservation(
                 DateTime.Parse("11-28-2023", CultureInfo.InvariantCulture),
                 "Nathan Bond",
                 "nathan@example.com",
-                2),
-            program.Result);
+                2)),
+            enumerator.Current);
+
+        Assert.False(enumerator.MoveNext());
     }
 }

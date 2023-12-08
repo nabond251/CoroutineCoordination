@@ -2,13 +2,20 @@
 
 public static class Interpreter
 {
-    public static async Task<T?> InterpretAsync<T>(Coroutine<T> program)
+    public static async Task<IEnumerable<T>> InterpretAsync<T>(Coroutine<T> program)
     {
-        foreach (var i in program)
+        async IAsyncEnumerable<T> GetEnumerableAsync()
         {
-            await i.ExecuteAsync();
+            foreach (var i in program)
+            {
+                await i.ExecuteAsync();
+                if (i is Coroutine<T>.Result r)
+                {
+                    yield return r.Value;
+                }
+            }
         }
 
-        return program.Result;
+        return await GetEnumerableAsync().ToListAsync();
     }
 }
